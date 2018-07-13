@@ -47,9 +47,9 @@ end
 task :access_control do |t|
   Pathname.new('./public/_redirects').open('w') do |f|
     f.write <<~CONTROL
-      /* 200! Role=user
-      /admin 200! Role=admin
-      / /login.html 401
+      /admin/* 200! Role=admin
+      /*       200! Role=user
+      /        /login.html 401
     CONTROL
   end
 end
