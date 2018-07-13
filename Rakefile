@@ -1,5 +1,9 @@
 require File.expand_path('../config/app', __FILE__)
 require 'pathname'
+require 'rake/clean'
+
+task default: :build
+CLOBBER.include('public/*')
 
 desc 'Build resources'
 task :build do
@@ -20,4 +24,3 @@ task :build do
     HTML
   end
 end
-
