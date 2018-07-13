@@ -1,4 +1,4 @@
-baseURL = "https://nervous-lamarr-25b224.netlify.com/"
+baseURL = "/"
 languageCode = "ja"
 title = "The Sample Site"
 theme = "robust"
