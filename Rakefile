@@ -2,7 +2,7 @@
 require 'pathname'
 require 'rake/clean'
 
-task default: %i( hugo create_headers login_page access_control )
+task default: %i( hugo create_headers login_page )
 CLOBBER.include('public/*')
 
 task :hugo do
