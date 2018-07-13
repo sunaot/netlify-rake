@@ -2,8 +2,12 @@
 require 'pathname'
 require 'rake/clean'
 
-task default: :build
+task default: :hugo
 CLOBBER.include('public/*')
+
+task :hugo do
+  system('hugo') or abort('失敗')
+end
 
 desc 'Build resources'
 task :build do

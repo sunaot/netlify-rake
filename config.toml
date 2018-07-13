@@ -1,0 +1,19 @@
+baseURL = "https://nervous-lamarr-25b224.netlify.com/"
+languageCode = "ja"
+title = "The Sample Site"
+theme = "robust"
+
+[params]
+  description = "This is site description"
+  dateformat = "Jan 2, 2006" # Optional
+
+[params.author]
+  thumbnail = "images/author.jpg"
+  name = "John Doe"
+  description = "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit</p><p>sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>"
+  facebook = "https://www.facebook.com/"
+  twitter = "https://twitter.com/"
+  github = "https://github.com/"
+
+[outputs]
+page = [ "HTML", "AMP" ] # if you want AMP enable.
