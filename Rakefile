@@ -19,7 +19,6 @@ end
 
 task :deploy_preview do
   Rake::Task['hugo'].invoke
-  Rake::Task['netlify:headers'].invoke
   Rake::Task['netlify:redirects'].invoke
   Rake::Task['netlify:login_page'].invoke
 end
