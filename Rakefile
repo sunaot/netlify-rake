@@ -13,17 +13,15 @@ NetlifyPath = {
 
 task :production do
   Rake::Task['hugo'].invoke
-end
-
-task :deploy_preview do
-  Rake::Task['build'].invoke
+  Rake::Task['netlify:redirects'].invoke
   Rake::Task['netlify:login_page'].invoke
 end
 
-task :build do
+task :deploy_preview do
   Rake::Task['hugo'].invoke
   Rake::Task['netlify:headers'].invoke
   Rake::Task['netlify:redirects'].invoke
+  Rake::Task['netlify:login_page'].invoke
 end
 
 task :hugo do
