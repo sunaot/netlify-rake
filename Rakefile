@@ -6,9 +6,9 @@ require 'erb'
 task default: %i( production )
 CLOBBER.include('public/*')
 NetlifyPath = {
-  headers: Pathname.new('./netlify/_headers').read,
-  redirects: Pathname.new('./netlify/_redirects').read,
-  login_page: Pathname.new('./netlify/login.html').read
+  headers: Pathname.new('./netlify/_headers'),
+  redirects: Pathname.new('./netlify/_redirects'),
+  login_page: Pathname.new('./netlify/login.html')
 }
 
 task :production do
@@ -34,17 +34,17 @@ namespace :netlify do
   directory './public'
   task :headers do |t|
     Pathname.new('./public/_headers').open('w') do |f|
-      f.write ERB.new(NetlifyPath[:headers]).result(binding)
+      f.write ERB.new(NetlifyPath[:headers].read).result(binding)
     end
   end
 
   task :redirects do |t|
     Pathname.new('./public/_redirects').open('w') do |f|
-      f.write ERB.new(NetlifyPath[:redirects]).result(binding)
+      f.write ERB.new(NetlifyPath[:redirects].read).result(binding)
     end
   end
 
   task :login_page do |t|
-    copy NetlifyPath[:login_page].to_s, './public/'
+    copy NetlifyPath[:login_page], './public/'
   end
 end
