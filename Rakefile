@@ -1,4 +1,3 @@
-#require File.expand_path('../config/app', __FILE__)
 require 'pathname'
 require 'rake/clean'
 
