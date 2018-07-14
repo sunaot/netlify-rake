@@ -12,7 +12,7 @@ NetlifyPath = {
 }
 
 task :production do
-  Rake::Task['build'].invoke
+  Rake::Task['hugo'].invoke
 end
 
 task :deploy_preview do
