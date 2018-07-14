@@ -1,74 +1,29 @@
 #require File.expand_path('../config/app', __FILE__)
 require 'pathname'
 require 'rake/clean'
+require 'erb'
 
-task default: %i( hugo create_headers login_page access_control )
+task default: %i( hugo headers redirects )
 CLOBBER.include('public/*')
+NetlifyPath = {
+  headers: Pathname.new('./netlify/_headers').read,
+  redirects: Pathname.new('./netlify/_redirects').read
+}
 
 task :hugo do
   system('hugo') or abort('失敗')
 end
 
 directory './public'
-task :create_headers do |t|
-  header = Pathname.new('./public/_headers')
-  header.open('w') do |f|
-    f.write <<~HEADER
-    HEADER
+task :headers do |t|
+  Pathname.new('./public/_headers').open('w') do |f|
+    f.write ERB.new(NetlifyPath[:headers]).result(binding)
   end
 end
 
-task :login_page do |t|
-  Pathname.new('./public/login.html').open('w') do |f|
-    f.write <<HTML
-<!DOCTYPE html>
-<html>
-<head>
-  <title>A static website</title>
-  <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-</head>
-<body>
-  <!-- Add a menu:
-   Log in / Sign up - when the user is not logged in
-   Username / Log out - when the user is logged in
-  -->
-  <div data-netlify-identity-menu></div>
-
-  <!-- Add a simpler button:
-    Simple button that will open the modal.
-  -->
-  <div data-netlify-identity-button>Login with Netlify Identity</div>
-</body>
-</html>
-HTML
-  end
-end
-
-task :access_control do |t|
+task :redirects do |t|
   Pathname.new('./public/_redirects').open('w') do |f|
-    f.write <<~CONTROL
-      /*   200!       Role=user
-      /    /404.html  403
-    CONTROL
+    f.write ERB.new(NetlifyPath[:redirects]).result(binding)
   end
 end
 
-desc 'Build resources'
-task :build do |t|
-  path = File.expand_path('../public/index.html', __FILE__)
-  html_file = Pathname.new(path)
-  html_file.open('w') do |f|
-    f.write <<~HTML
-      <!DOCTYPE html>
-      <html lang="ja">
-      <head>
-        <title>見本のページ</title>
-      </head>
-      <body>
-        <h1>これは見本のページです</h1>
-        <p>こんなページが生成されることもあるよ。</p>
-      </body>
-      </html>
-    HTML
-  end
-end
