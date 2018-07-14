@@ -1,0 +1,4 @@
+[context.production]
+  command = "rake production"
+[context.branch-deploy]
+  command = "rake deploy_preview"
