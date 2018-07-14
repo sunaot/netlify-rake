@@ -47,7 +47,7 @@ end
 task :access_control do |t|
   Pathname.new('./public/_redirects').open('w') do |f|
     f.write <<~CONTROL
-      /   /404.html  404
+      /*   /404.html  404
     CONTROL
   end
 end
