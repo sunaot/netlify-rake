@@ -13,3 +13,15 @@ netlify
 ├── _redirects
 └── login.html
 ```
+
+環境の判定は `netlify.toml` でやっている.
+
+```
+[context.production]
+  command = "rake production"
+
+[context.deploy-preview]
+  command = "rake deploy_preview"
+```
+
+see also) https://www.netlify.com/blog/2017/04/07/selective-password-protection/
